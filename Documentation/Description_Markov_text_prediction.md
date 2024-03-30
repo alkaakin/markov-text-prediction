@@ -1,9 +1,9 @@
-### Descriptive document: Markov text prediction
+### Descriptive document: Markov text generator
 Aleksi Kaakinen <alkaakin@helsinki.fi>
 
-### Text prediction algorithm
+### Text generation algorithm
 
-The topic for my Algorithms and AI course exercise program will be implementing a text prediction program. The text prediction algorithm will be based on natural language processing (NLP) - the procession of natural language datasets such as speeches or corpora of text. The implementation has its basis in rule- and probability-based approach.
+The topic for my Algorithms and AI course exercise program will be implementing a text generation program. The text generation algorithm will be based on natural language processing (NLP) - the procession of natural language datasets such as speeches or corpora of text. The implementation has its basis in rule- and probability-based approach.
 
 ## Specification
 

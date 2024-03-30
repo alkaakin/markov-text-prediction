@@ -23,6 +23,16 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
+
+    //Apache POI dependency
+    implementation 'org.apache.poi:poi-ooxml:5.2.2'
+
+    // Log4j2 API
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+
+    // Log4j2 Core
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
