@@ -44,11 +44,55 @@ public class Trie {
         }
     }
     
-    public void insertTrie(String nGram) throws InvalidFormatException, IOException {
-        int markovOrder = n;
+    
+   public void PrintTrie() throws InvalidFormatException, IOException {
+       
+       
+   }
+    //doesnt work as intended at the moment, but will be fixed
+   public void generateName() {
+       List<Character> keysAsArray = new ArrayList<Character>(root.children.keySet());
+       Random r = new Random();
+       TrieNode random = root.children.get(r.nextInt(keysAsArray.size()));
+       
+   }
+   
+   
+   public void insertTrie(String nGram) throws InvalidFormatException, IOException {
         
+        Character firstLetter = nGram.substring(0,1).charAt(0);
+        Character secondLetter = nGram.substring(1,2).charAt(0);
+        
+        System.out.println(firstLetter + " first");
+        System.out.println(secondLetter + " second");
+        System.out.println("To be inserted: " + firstLetter + secondLetter);
+       
+        current = root;
+        
+        if (current.children.containsKey(firstLetter)) {
+            current = current.children.get(firstLetter);
+            if (current.children.containsKey(secondLetter)) {
+                current.frequencyMap.updateFrequency(secondLetter);
+            }
+            else if (!current.children.containsKey(secondLetter)) {
+                current.children.putIfAbsent(secondLetter, null);
+                current.frequencyMap.updateFrequency(secondLetter);
+        }
+        
+        current = root;
+        
+        if (!current.children.containsKey(firstLetter)) {
+            current.children.putIfAbsent(firstLetter, new TrieNode());
+            current = current.children.get(firstLetter);
+            current.children.putIfAbsent(secondLetter, null);
+            current.frequencyMap.updateFrequency(secondLetter);
+        }
+        
+        }
     }
-        
+    
+    //wordProcessor splits given words into ngrams and gives them to InsertTrie method
+    //the ngram functionality should be implemented here (=the order of ngrams, given to Trie at the beginning)
     public void wordProcessor() throws InvalidFormatException, IOException {
         list = excelreader.fileToList();
         ArrayList<String> bigrams = new ArrayList<String>();
@@ -64,8 +108,6 @@ public class Trie {
         for (String bigram : bigrams) {
             System.out.println(bigram);
         }
-        
-        
         //iterate through the list, save ngrams to trie as trienodes
         //for n=2, save doubles, n¤3, save triples
         //save frequency for each pass-through to latter node
@@ -73,19 +115,18 @@ public class Trie {
         //frequencyupdater will hold information in hashmap, children and frequencies
     }
     
-    public boolean searchTrie() {
-        return false;
-    }
     
     public class TrieNode {
         
-        FrequencyUpdater frequencies;
-        int counter;
+        HashMap<Character, TrieNode> children;
+        FrequencyUpdater frequencyMap;
+        //int counter;
+        
         
         public TrieNode() {
-           this.counter = 1; 
-           this.frequencies = new FrequencyUpdater();
-                
+           //this.counter = 1; 
+           this.frequencyMap = new FrequencyUpdater();
+           children = new HashMap<Character, TrieNode>();     
         }
         
     }
@@ -96,6 +137,15 @@ public class Trie {
         public FrequencyUpdater() {
             frequencies = new HashMap<>();
         }
+        
+        public void updateFrequency(Character k) {
+            frequencies.putIfAbsent(k, frequencies.get(k)+1);
+        }
+        
+        public Integer maxFrequency(Character k) {
+            return 0;
+        }
+        
     }
     
     public class ExcelReader {
@@ -137,7 +187,4 @@ public class Trie {
     
     
 
-    //Trie class splits a word/text file into 3-grams and stores it into its structure
-    //We need to add nodes under nodes.
-    
 
