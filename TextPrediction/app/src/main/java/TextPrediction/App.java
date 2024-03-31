@@ -21,6 +21,8 @@ public class App {
         Trie trietest = new Trie(2, test);
         trietest.printList();
         trietest.wordProcessor();
+        trietest.generateName();
+        
         
     }
 }
