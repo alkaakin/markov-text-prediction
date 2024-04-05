@@ -45,6 +45,8 @@ java {
 application {
     // Define the main class for the application.
     mainClass = 'TextPrediction.App'
+    //Define System.in as standard input
+    run.standardInput = System.in
 }
 
 tasks.named('test') {
