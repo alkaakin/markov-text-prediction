@@ -41,7 +41,7 @@ public class Trie {
         }
     }
     
-    /*
+    /**
     A helper method for printing out the names in the excel file.
     */
     public void printList() throws InvalidFormatException, IOException {
@@ -50,7 +50,7 @@ public class Trie {
             System.out.println(item);
         }
     }
-   /*
+   /**
     generateName() is the main functionality of the Trie class and the algorithm in general.
     The method chooses a random character from the keyset and uses that as the first letter of the to-be generated name.
     The method then gives information about the TrieNode under iteration, the chosen character, counter and the so far formed String to another method. 
@@ -78,7 +78,8 @@ public class Trie {
        System.out.println("final name: " + name);
    }
    
-   /*
+   /**
+    
    The generateLetters method is a recursive method used for picking the most probable letters under each given character.
    Each character picked via this method is inserted to the string and given as an input to the method itself (to be recursively used for traversing the trie).
    The method stops after the counter reaches 6, to the formed name's length is 7 (as of now). 
@@ -123,7 +124,7 @@ public class Trie {
    }
        
    
-   /*
+   /**
    The insertTrie method inserts the given names to trie as nGrams. Characters are added as chains under the Trie. 
    If a character has already been added under another circumstance, only the frequency is updated. 
    */
@@ -162,7 +163,7 @@ public class Trie {
        
    }
     
-   /*
+   /**
    Method wordProcessor() picks words from a list processed by ExcelReader.
    These words are split into nGrams according to user-given 'Markov order'. N-grams are then given to InsertTrie() method.
    */
@@ -192,7 +193,7 @@ public class Trie {
         //To be implemented during week 4. The Terminal class will check for endings of words to create more plausible names.
     }
     
-    /*
+    /**
     The TrieNode class is a foundation for the Trie model. Each TrieNode holds a HashMap for storing the child nodes, as well as a FrequencyTable object for storing probabilities.
     The class also has int depth as an attribute to check when it's time to traverse the Trie from the root when generating words (as maximum depth indicates that there are no children
     under the most recent TrieNode). Depth is also used to not accidentally update frequencies for nodes directly under root, as this would lead to an unbalanced formation of random
@@ -217,7 +218,7 @@ public class Trie {
         
     }
     
-    /* 
+    /** 
     The FrequencyTable object implements the so called Markov chain functionality for the algorithm. It is used for checking the most populated
     child character under each node (via the maxFrequency method).
     */
@@ -261,7 +262,7 @@ public class Trie {
         
     }
     
-    /*
+    /**
     The ExcelReader helper class contains the fileToList method for processing the excel file in question. 
     */
     public class ExcelReader {

@@ -47,6 +47,7 @@ application {
     mainClass = 'TextPrediction.App'
     //Define System.in as standard input
     run.standardInput = System.in
+    //rootProject.name = 'Markov name generator"
 }
 
 tasks.named('test') {
