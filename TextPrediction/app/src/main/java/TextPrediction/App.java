@@ -23,6 +23,7 @@ public class App {
         System.out.println("Welcome to the name generator. Please give an order between 1-4. The higher the order, the better the results.");
         int order = 0;
         int volume = 0;
+        int length = 0;
         while(order < 1 || order > 4 || volume < 1 || volume > 10000) {
             System.out.println("Enter your order (1-4):");
             while(!inputTaker.hasNextInt()) {
@@ -44,9 +45,19 @@ public class App {
                 System.out.println("Please enter a number between 1 and 10 000.");
             }
             
+            System.out.println("Please also indicate the length of the name being generated (3-10 characters).");
+            while(!inputTaker.hasNextInt()) {
+                System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
+                inputTaker.next(); // to consume the incorrect input
+            }
+            length = inputTaker.nextInt();
+            if (length < 3 || length > 10) {
+                System.out.println("Please enter a number between 3 and 10.");
+            }
+            
         }
        
-        Trie trietest = new Trie(order, volume, test);
+        Trie trietest = new Trie(order, volume, length, test);
         trietest.printList();
         trietest.wordProcessor();
         trietest.generateName();

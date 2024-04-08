@@ -24,11 +24,13 @@ public class Trie {
     ArrayList<String> list;
     int n;
     int volume;
+    int namelength;
     
-    public Trie(int n, int volume, File file) {
+    public Trie(int n, int volume, int namelength, File file) {
         this.root = new TrieNode();
         this.root.setDepth(0);
         this.volume = volume;
+        this.namelength = namelength;
         current = root;
         this.itr = file;
         this.excelreader = new ExcelReader(itr, volume);
@@ -59,20 +61,20 @@ public class Trie {
        current = root;
        String name = "";
        Character randChar = null;
-       System.out.println(current.children.keySet());
        List<Character> keysAsArray = new ArrayList<Character>(current.children.keySet());
        Random r = new Random();
        keysAsArray.removeIf(c -> c == '-');
-       //First letter needs to be a random key under root
+       //First letter needs to be a random key under root without any hyphens included.
+         /**
+        * Test printing for the full key set below.
+        */
+       System.out.println(keysAsArray.toString());
        if (!keysAsArray.isEmpty()) {
            int randomIndex = r.nextInt(keysAsArray.size());
            randChar = keysAsArray.get(randomIndex);
        }
        System.out.println("This is the first letter of the name: " + randChar);
-       name += randChar;
-       System.out.println(name);
        TrieNode nextNode = root.children.get(randChar);
-       System.out.println("Possible followers are: " + nextNode.frequencyTable.frequencies);
        name += generateLetters(nextNode, randChar, 1, "");
        name = capitalizeFirstLetter(name);
        System.out.println("final name: " + name);
@@ -85,23 +87,25 @@ public class Trie {
    The method stops after the counter reaches 6, to the formed name's length is 7 (as of now). 
    A functionality for tracking the "realness" of names generated is under construction.
    */
-   public String generateLetters(TrieNode node, Character z, int counter, String string) {  
+   public String generateLetters(TrieNode node, Character c, int counter, String string) {  
        
-       if (counter<=6) { 
+       if (counter == 1) {
+           string += c.toString();
+       }
+       
+       if (counter<=namelength-1) { 
            
                if (node.children.isEmpty()) {
-                   node = root.children.get(z);
+                   System.out.println("No possible followers, moving to root.");
+                   node = root.children.get(c);
                }
                 
-               char c = node.frequencyTable.maxFrequency().charValue();
-
-               if (node.children.containsKey(c)) {
+               c = node.frequencyTable.maxFrequency().charValue();
+               System.out.println("Possible followers of the last character of the string are: " + node.frequencyTable.frequencies);
+               System.out.println("The most probable next letter is " + c);
+               
+               if (!node.children.isEmpty()){
                    node = node.children.get(c);
-                   System.out.println("The most probable next letter is " + z);
-                   System.out.println("Possible followers are: " + node.frequencyTable.frequencies);
-                   if (node.frequencyTable.frequencies.isEmpty()) {
-                       System.out.println("No possible followers, moving to root.");
-                   }
                }
 
                
