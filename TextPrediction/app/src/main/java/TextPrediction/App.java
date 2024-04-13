@@ -24,7 +24,7 @@ public class App {
         int order = 0;
         int volume = 0;
         int length = 0;
-        while(order < 1 || order > 4 || volume < 1 || volume > 10000) {
+        while(order < 1 || order > 4) {
             System.out.println("Enter your order (1-4):");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 4.");
@@ -34,7 +34,13 @@ public class App {
             if (order < 1 || order > 4) {
                 System.out.println("Please enter a number between 1 and 4.");
             }
+            
+        }
         
+       
+        Trie trietest = new Trie(order);
+        
+        while (volume < 1 || volume > 10000) {
             System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000)");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
@@ -56,11 +62,12 @@ public class App {
             }
             
         }
-       
-        Trie trietest = new Trie(order, volume, length, test);
-        trietest.printList();
-        trietest.wordProcessor();
-        trietest.generateName();
+        //Trie populated
+        InputHandler input = new InputHandler(test, trietest, volume);
+        input.wordProcessor();
+        //Word generated
+        TextGenerator generator = new TextGenerator(trietest, trietest.root, length, trietest.n);
+        generator.generateName();
         
         
     }
