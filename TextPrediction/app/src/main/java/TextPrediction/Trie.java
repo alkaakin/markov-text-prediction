@@ -57,23 +57,21 @@ public class Trie {
    }
    
        public String trieFind(String name) {
-       //haetaan aina rootista n mukaisesti:
-       //counting n letter from the end of the given name's last letter
-       //what is the weighed keyset following the last n letters
-       //TrieNode current = root;
+
        TrieNode current = root;
            System.out.println(name);
-       //Kuljetaan lenkki viimeiseen lapseen saakka
-       /**
-       if (n <= name.length()) {
-           System.out.println(n);
-           System.out.println(name);
-       String ngram = name.substring(name.length()-n+1, name.length());
-       for (int i = 0; i < ngram.length(); i++) {
+       int effectiveN = Math.min(n, name.length());
+       
+       if (effectiveN > 0) {
+           System.out.println("The order is " + effectiveN);
+           System.out.println("The name so far is " + name);
+           String ngram = name.substring((name.length() - effectiveN));
+           System.out.println("nGram under handling is: " + ngram);
+           for (int i = 0; i < ngram.length(); i++) {
            current = current.children.get(ngram.charAt(i));
-            }
+           if (current == null) return "";
+           }
        }
-       */
        List<Character> keys = new ArrayList<Character>();
        keys.addAll(current.children.keySet());
            System.out.println(keys);
@@ -94,16 +92,24 @@ public class Trie {
        int weight = r.nextInt(sum);
            System.out.println("Weight is" + weight);
        //create a loop for choosing one of the list items randomly
-       int comparable = values.get(0);
+
+       if (values.get(0) != null) {
+           System.out.println(values.get(0));
+       }
+       else if (values.get(0) == null) {
+           System.out.println("values(0) is null.");
+       }
+       int comparable = 0;
        int finalIndex = 0;
-       for (int i = 0; i < values.size(); i++) {
-           if (weight > comparable) {
-               comparable += values.get(i);
-               continue;
-           }
+       for (int i = 0; i < values.size()-1; i++) {
+           comparable += values.get(i); 
+           System.out.println("comparable is " + comparable);
            if (weight <= comparable) {
-              finalIndex = values.indexOf(i);
-              continue;
+            finalIndex = i;
+            break;
+           }
+           if (weight > comparable) {
+               continue;
            }
        }
         //now return the corresponding character.

@@ -38,8 +38,6 @@ public class TextGenerator {
        String name = "";
        int counter = 0;
        while (counter < namelength) {
-           //tässä metodissa ei tarvitse siirtää pointteria
-           //haetaan aina rootista.
            name += trie.trieFind(name);
            counter ++;
        }
