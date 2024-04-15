@@ -25,7 +25,7 @@ public class App {
             System.out.println("Enter your order (1-4):");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 4.");
-                inputTaker.next(); // to consume the incorrect input
+                inputTaker.next(); 
             }
             order = inputTaker.nextInt();
             if (order < 1 || order > 4) {
@@ -40,7 +40,7 @@ public class App {
             System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000)");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
-                inputTaker.next(); // to consume the incorrect input
+                inputTaker.next(); 
             }
             volume = inputTaker.nextInt();
             if (volume < 1 || volume > 10000) {
@@ -53,7 +53,7 @@ public class App {
             System.out.println("Please also indicate the length of the name being generated (3-10 characters).");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
-                inputTaker.next(); // to consume the incorrect input
+                inputTaker.next(); 
             }
             length = inputTaker.nextInt();
             if (length < 3 || length > 10) {

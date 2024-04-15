@@ -43,7 +43,7 @@ public class TextGenerator {
        }
        
        name = capitalizeFirstLetter(name);
-       System.out.println("final name: " + name);
+       System.out.println("The final name is: " + name);
    }
    
    public String capitalizeFirstLetter(String input) {

@@ -43,7 +43,6 @@ public class InputHandler {
                 Iterator<Row> rowIterator = sheet.rowIterator();
                 Integer c = 0;
                 String word = "";
-                //A scanner functionality for inputting the desired amount of input data will be added during week 4.
                 while (rowIterator.hasNext() && c < volume) {
                     Row row = rowIterator.next();
                     Cell cell = row.getCell(0);
@@ -70,9 +69,6 @@ public class InputHandler {
         list = fileToList();
         ArrayList<String> ngrams = new ArrayList<String>();
         for (String word : list) {
-            /*Singular words are looped through so that the last nGram to be looped starts n letters from the end of the word.
-            n is the Markov order given to the Trie object at its inception.
-            */
             for (int i = 0; i < word.length() - n; i++) {
                 String nGram = word.substring(i, i + n + 1);
                 nGram = nGram.toLowerCase().replaceAll("[^a-zäö-]", ""); //removes all letters that are not a-z, ä, ö or hyphens.
@@ -86,11 +82,4 @@ public class InputHandler {
             System.out.println(ngram);
         }
     }
-    
-    
-    
-    
-    
-    
-    
 }
