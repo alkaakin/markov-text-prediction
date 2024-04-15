@@ -60,10 +60,6 @@ public class InputHandler {
             return words;
         }
             
-            
-            
-    
-        
         /**
    Method wordProcessor() picks words from a list processed by ExcelReader.
    These words are split into nGrams according to user-given 'Markov order'. N-grams are then given to InsertTrie() method.

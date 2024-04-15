@@ -9,13 +9,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
 
     public static void main(String[] args) throws InvalidFormatException, IOException {
         Scanner inputTaker = new Scanner(System.in);
-        System.out.println(new App().getGreeting());
         File test = new File("/home/alkaakin/Documents/markov-text-prediction/TextPrediction/mod.xlsx");
         if (!test.isFile()) {
             System.out.println("File not found.");
@@ -37,7 +34,6 @@ public class App {
             
         }
         
-       
         Trie trietest = new Trie(order);
         
         while (volume < 1 || volume > 10000) {
@@ -50,6 +46,9 @@ public class App {
             if (volume < 1 || volume > 10000) {
                 System.out.println("Please enter a number between 1 and 10 000.");
             }
+        }
+            
+        while(length < 3 || length > 10) {
             
             System.out.println("Please also indicate the length of the name being generated (3-10 characters).");
             while(!inputTaker.hasNextInt()) {

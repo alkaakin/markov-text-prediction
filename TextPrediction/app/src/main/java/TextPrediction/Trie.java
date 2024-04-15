@@ -59,9 +59,9 @@ public class Trie {
        public String trieFind(String name) {
 
        TrieNode current = root;
-           System.out.println(name);
+       System.out.println(name);
        int effectiveN = Math.min(n, name.length());
-       
+
        if (effectiveN > 0) {
            System.out.println("The order is " + effectiveN);
            System.out.println("The name so far is " + name);
@@ -72,6 +72,7 @@ public class Trie {
            if (current == null) return "";
            }
        }
+       
        List<Character> keys = new ArrayList<Character>();
        keys.addAll(current.children.keySet());
            System.out.println(keys);
