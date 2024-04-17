@@ -70,6 +70,8 @@ public class Trie {
            if (current == null) return "";
            }
        }
+       System.out.println("The order is " + effectiveN);
+       System.out.println("The name so far is " + name);
        List<Character> keys = new ArrayList<Character>();
        keys.addAll(current.children.keySet());
        ArrayList<Integer> values = new ArrayList<>();

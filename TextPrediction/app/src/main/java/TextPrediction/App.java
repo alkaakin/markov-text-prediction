@@ -37,7 +37,7 @@ public class App {
         Trie trietest = new Trie(order);
         
         while (volume < 1 || volume > 10000) {
-            System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000)");
+            System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000). The larger the dataset, the longer the names can be.");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
                 inputTaker.next(); 
@@ -50,7 +50,7 @@ public class App {
             
         while(length < 3 || length > 10) {
             
-            System.out.println("Please also indicate the length of the name being generated (3-10 characters).");
+            System.out.println("Please also indicate the desired maximum length of the name being generated (3-10 characters).");
             while(!inputTaker.hasNextInt()) {
                 System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
                 inputTaker.next(); 
