@@ -33,7 +33,7 @@ public class TextGenerator {
         this.n = n;
     }
     
-    public void generateName() {
+    public String generateName() {
        
        String name = "";
        int counter = 0;
@@ -43,7 +43,7 @@ public class TextGenerator {
        }
        
        name = capitalizeFirstLetter(name);
-       System.out.println("The final name is: " + name);
+       return name;
    }
    
    public String capitalizeFirstLetter(String input) {

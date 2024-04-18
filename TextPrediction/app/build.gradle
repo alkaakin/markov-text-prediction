@@ -8,7 +8,11 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'checkstyle'
 }
+
+group = 'com.example'
+version = '0.1.0-SNAPSHOT'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -42,6 +46,10 @@ java {
     }
 }
 
+checkstyle {
+    toolVersion = '8.41'
+}
+
 application {
     // Define the main class for the application.
     mainClass = 'TextPrediction.App'
@@ -53,4 +61,13 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+    maxHeapSize = '1G'
+    testLogging {
+    events "passed", "skipped", "failed"
+    showStandardStreams = true
+    exceptionFormat = 'full'
+    dependsOn 'checkstyleMain'
+    dependsOn 'checkstyleTest'
+
+    }
 }

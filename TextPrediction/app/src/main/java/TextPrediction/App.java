@@ -11,64 +11,42 @@ import org.apache.poi.ss.usermodel.*;
 public class App {
 
 
-    public static void main(String[] args) throws InvalidFormatException, IOException {
+    public static void main(String[] args) {
+        try {
         Scanner inputTaker = new Scanner(System.in);
-        File test = new File("/home/alkaakin/Documents/markov-text-prediction/TextPrediction/mod.xlsx");
-        if (!test.isFile()) {
-            System.out.println("File not found.");
-        }
-        System.out.println("Welcome to the name generator. Please give an order between 1-4. The higher the order, the better the results.");
-        int order = 0;
-        int volume = 0;
-        int length = 0;
-        while(order < 1 || order > 4) {
-            System.out.println("Enter your order (1-4):");
-            while(!inputTaker.hasNextInt()) {
-                System.out.println("That's not a valid number. Please enter a number between 1 and 4.");
-                inputTaker.next(); 
-            }
-            order = inputTaker.nextInt();
-            if (order < 1 || order > 4) {
-                System.out.println("Please enter a number between 1 and 4.");
-            }
-            
-        }
+        System.out.println("Welcome to the name generator. The name generator generates natural language mimicking names based on real names.");
+        System.out.println("For more authentic names, please use a higher order. Please note, however, that higher orders produce shorter names, and vice versa.");
+        System.out.println("Please give an order between 1-4. The higher the order, the better the results.");
+        int order = promptNumber(inputTaker, "Enter your order (1-4):", 1, 4);
         
-        Trie trietest = new Trie(order);
+        System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000). The larger the dataset, the longer the names can be.");
+        int volume = promptNumber(inputTaker, "Enter volume (1-10,000):", 1, 10000);
         
-        while (volume < 1 || volume > 10000) {
-            System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000). The larger the dataset, the longer the names can be.");
-            while(!inputTaker.hasNextInt()) {
-                System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
-                inputTaker.next(); 
-            }
-            volume = inputTaker.nextInt();
-            if (volume < 1 || volume > 10000) {
-                System.out.println("Please enter a number between 1 and 10 000.");
-            }
-        }
-            
-        while(length < 3 || length > 10) {
-            
-            System.out.println("Please also indicate the desired maximum length of the name being generated (3-10 characters).");
-            while(!inputTaker.hasNextInt()) {
-                System.out.println("That's not a valid number. Please enter a number between 1 and 10 000.");
-                inputTaker.next(); 
-            }
-            length = inputTaker.nextInt();
-            if (length < 3 || length > 10) {
-                System.out.println("Please enter a number between 3 and 10.");
-            }
-            
-        }
-        //Trie populated
-        InputHandler input = new InputHandler(test, trietest, volume);
-        input.wordProcessor();
-        //Word generated
-        TextGenerator generator = new TextGenerator(trietest, trietest.root, length, trietest.n);
-        generator.generateName();
+        System.out.println("Indicate the desired maximum length of the name (3-10 characters).");
+        int length = promptNumber(inputTaker, "Enter length (3-10):", 3, 10);
+        
+         GeneratorApplication generatorApp = new GeneratorApplication(order, volume, length);
+         String name = generatorApp.generateName();
+         System.out.println("Generated Name: " + name);
         
         
+        
+    } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
+    private static int promptNumber(Scanner scanner, String prompt, int min, int max) {
+        int number;
+        do {
+            System.out.println(prompt);
+            while (!scanner.hasNextInt()) {
+                System.out.println("That's not a valid number. Try again.");
+                scanner.next();
+            }
+            number = scanner.nextInt();
+        } while (number < min || number > max);
+        return number;
     }
 }
 
