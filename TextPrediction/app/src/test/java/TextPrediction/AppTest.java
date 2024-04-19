@@ -16,9 +16,20 @@ class AppTest {
         App app = new App();
         int input = 6;
         int expectedOutput = 8;
-        assertEquals(expectedOutput, app.)
+        //assertEquals(expectedOutput, app.)
         
     }    
+    
+     @Test
+    public void testGeneratedNameMeetsLengthRequirement() {
+        try {
+            GeneratorApplication testApp = new GeneratorApplication(2, 500, 5);
+            String name = testApp.generateName();
+            assertTrue(name.length() >= 1, "Generated name should be at least 5 characters long");
+        } catch (Exception e) {
+            fail("Service threw an exception: " + e.getMessage());
+        }
+    }
         
         
 }

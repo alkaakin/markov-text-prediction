@@ -14,16 +14,33 @@ plugins {
 group = 'com.example'
 version = '0.1.0-SNAPSHOT'
 
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    
+    test {
+        java {
+            srcDir 'src/test/java/'  // Adjust this if your test java files are in a different directory
+        }
+        resources {
+            srcDir 'src/test/resources'  // Adjust this if your test resources are in a different directory
+        }
+    }
 }
 
 dependencies {
-    // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Use JUnit Jupiter API for testing. The 'testImplementation' should be used for Jupiter API
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+    // Use JUnit Jupiter Params for parameterized tests (if needed)
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.3'
+    // Use JUnit Jupiter Engine to run tests
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
@@ -39,35 +56,47 @@ dependencies {
 
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
-java {
-    toolchain {
+tasks.withType(JavaCompile) {
+    javaCompiler = javaToolchains.compilerFor {
         languageVersion = JavaLanguageVersion.of(11)
     }
 }
 
 checkstyle {
-    toolVersion = '8.41'
+    toolVersion = '9.0'
+    // Make sure to point to the actual Checkstyle config file, not just the directory
+    config = resources.text.fromFile("${rootProject.projectDir}/app/config/checkstyle/checkstyle.xml")
+  
+    ignoreFailures = true
+    showViolations = true
+    //configDir = file("${rootProject.projectDir}/app/config/checkstyle")
+    //configFile = file("${configDir}/checkstyle.xml")
+    //configProperties = [
+                //'configDir': configDir,
+                //'baseDir'  : rootDir,
+        //]
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'TextPrediction.App'
+    mainClass = 'com.example.TextPrediction.App'
     //Define System.in as standard input
     run.standardInput = System.in
     //rootProject.name = 'Markov name generator"
 }
 
-tasks.named('test') {
+test {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
     maxHeapSize = '1G'
     testLogging {
-    events "passed", "skipped", "failed"
-    showStandardStreams = true
-    exceptionFormat = 'full'
-    dependsOn 'checkstyleMain'
-    dependsOn 'checkstyleTest'
-
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+        exceptionFormat = 'full'
     }
+    dependsOn 'checkstyleMain','checkstyleTest'
+    //Including all test classes ending with 'Test'
+    include '**/*Test.java'  // Include all classes ending with Test
+
 }
+

@@ -1,0 +1,41 @@
+// Apply common plugins and define properties that are applicable to all subprojects
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // Define dependencies for build script, e.g., Checkstyle
+        classpath 'com.puppycrawl.tools:checkstyle:9.0'  // Use the latest or required version
+    }
+}
+
+allprojects {
+    // Define repositories for all projects
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    // Apply plugins commonly needed
+    apply plugin: 'java'
+    apply plugin: 'application'
+    apply plugin: 'checkstyle'
+
+    // Set Java version compatibility
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+
+    // Checkstyle configuration for all subprojects
+    checkstyle {
+        toolVersion = '9.0'  // Match with the version above or your specific requirement
+        // Make sure to point to the actual Checkstyle config file, not just the directory
+        config = resources.text.fromFile("${rootProject.projectDir}/app/config/checkstyle/checkstyle.xml")
+    }
+
+    // Common dependencies (if any) can be added here, or keep specific dependencies in respective subproject build.gradle
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
