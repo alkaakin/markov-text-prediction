@@ -26,10 +26,10 @@ sourceSets {
     
     test {
         java {
-            srcDir 'src/test/java/'  // Adjust this if your test java files are in a different directory
+            srcDirs = ['src/test/java']  // Adjust this if your test java files are in a different directory
         }
         resources {
-            srcDir 'src/test/resources'  // Adjust this if your test resources are in a different directory
+            srcDirs = ['src/test/resources']  // Adjust this if your test resources are in a different directory
         }
     }
 }
@@ -79,7 +79,7 @@ checkstyle {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.example.TextPrediction.App'
+    mainClass = 'TextPrediction.App'
     //Define System.in as standard input
     run.standardInput = System.in
     //rootProject.name = 'Markov name generator"
@@ -96,7 +96,7 @@ test {
     }
     dependsOn 'checkstyleMain','checkstyleTest'
     //Including all test classes ending with 'Test'
-    include '**/*Test.java'  // Include all classes ending with Test
+    include '**/*Test.class'  // Include all classes ending with Test
 
 }
 

@@ -4,6 +4,8 @@
  */
 package TextPrediction;
 
+import java.io.IOException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +45,7 @@ public class TrieTest {
     public void testInsertTrie() throws Exception {
         System.out.println("insertTrie");
         String nGram = "";
-        Trie instance = null;
+        Trie instance = new Trie(2);
         instance.insertTrie(nGram);
         // TODO review the generated test code and remove the default call to fail.
         /*fail("The test case is a prototype.");*/
@@ -53,11 +55,12 @@ public class TrieTest {
      * Test of trieFind method, of class Trie.
      */
     @Test
-    public void testTrieFind() {
+    public void testTrieFind() throws InvalidFormatException, IOException {
         System.out.println("trieFind");
-        String name = "";
-        Trie instance = null;
-        String expResult = "";
+        String name = "mark";
+        Trie instance = new Trie(4);
+        instance.insertTrie(name);
+        String expResult = "mark";
         String result = instance.trieFind(name);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
