@@ -25,7 +25,7 @@ public class App {
         System.out.println("Indicate the desired maximum length of the name (3-10 characters).");
         int length = promptNumber(inputTaker, "Enter length (3-10):", 3, 10);
         
-         GeneratorApplication generatorApp = new GeneratorApplication(order, volume, length);
+         NameGenerator generatorApp = new NameGenerator(order, volume, length);
          String name = generatorApp.generateName();
          System.out.println("Generated Name: " + name);
         
