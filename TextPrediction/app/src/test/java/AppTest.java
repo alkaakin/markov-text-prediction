@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-    }
         
         
     @Test    
@@ -21,9 +19,9 @@ class AppTest {
     }    
     
      @Test
-    public void testGeneratedNameMeetsLengthRequirement() {
+    public void LengthRequirement() {
         try {
-            GeneratorApplication testApp = new GeneratorApplication(2, 500, 5);
+            NameGenerator testApp = new NameGenerator(2, 500, 5);
             String name = testApp.generateName();
             assertTrue(name.length() >= 1, "Generated name should be at least 5 characters long");
         } catch (Exception e) {

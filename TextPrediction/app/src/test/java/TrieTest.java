@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TrieTest {
     
+    private Trie trie;
+    
     public TrieTest() {
     }
     
@@ -38,33 +40,55 @@ public class TrieTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of insertTrie method, of class Trie.
-     */
+    @BeforeEach
+    void setup() throws InvalidFormatException, IOException {
+        this.trie = new Trie(2);  
+       
+    }
+    
     @Test
-    public void testInsertTrie() throws Exception {
-        System.out.println("insertTrie");
-        String nGram = "";
-        Trie instance = new Trie(2);
-        instance.insertTrie(nGram);
-        // TODO review the generated test code and remove the default call to fail.
-        /*fail("The test case is a prototype.");*/
+   
+    void testInsertAndFind() {
+        assertDoesNotThrow(() -> trie.insertTrie("cat"));
+        assertEquals("a", trie.trieFind("c"), "Should give 'a' after 'c'");
+        assertEquals("t", trie.trieFind("ca"), "Should give 't' after 'ca'");
     }
 
-    /**
-     * Test of trieFind method, of class Trie.
-     */
     @Test
-    public void testTrieFind() throws InvalidFormatException, IOException {
-        System.out.println("trieFind");
-        String name = "mark";
-        Trie instance = new Trie(4);
-        instance.insertTrie(name);
-        String expResult = "mark";
-        String result = instance.trieFind(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        /*fail("The test case is a prototype.");
-        }*/
+    void testBoundaries() {
+        assertDoesNotThrow(() -> trie.insertTrie("ab"));  // test minimal length insert
+        assertDoesNotThrow(() -> trie.insertTrie("abc"));  // test exact n-gram length insert
+        assertDoesNotThrow(() -> trie.insertTrie("abcd"));  // test beyond n-gram length insert, should not insert
+        assertEquals("", trie.trieFind("abc"), "No followers should be given for 'ab'");
     }
+    
+    @Test
+    void testForFollowers() {
+    assertDoesNotThrow(() -> trie.insertTrie("mik"));
+    assertDoesNotThrow(() -> trie.insertTrie("mil"));
+    // Giving the next character after the 2-character prefix "mi" (from "mik" and "mil")
+    String prediction = trie.trieFind("mi");
+    assertNotNull(prediction, "Next letter should not be null");
+    assertTrue(prediction.length() == 1, "Next letter should be a single character");
+    assertTrue(prediction.equals("k") || prediction.equals("l"), "Should give 'k' or 'l' as the next character after 'mi'");
 }
+    
+    @Test
+    void testNoFollowers() {
+    assertEquals("", trie.trieFind("xyz"), "Non-existing prefix should return empty prediction");
+    }
+    
+    @Test
+    void testEmptyInput() throws IOException, InvalidFormatException {
+    trie.insertTrie("boc");  
+    trie.insertTrie("abd");
+    String prediction = trie.trieFind("");    
+    assertTrue(!prediction.isEmpty());
+    }
+    
+}
+    
+    
+    
+    
+

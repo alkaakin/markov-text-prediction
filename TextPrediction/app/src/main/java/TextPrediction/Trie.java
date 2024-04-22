@@ -32,7 +32,7 @@ public class Trie {
    */
    public void insertTrie(String nGram) throws InvalidFormatException, IOException {
        
-       if (nGram == null || nGram.isEmpty()) return;
+       if (nGram == null || nGram.isEmpty() || nGram.length() != n+1 ) return;
   
         TrieNode current = root;
         
