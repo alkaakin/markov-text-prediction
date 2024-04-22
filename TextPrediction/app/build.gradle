@@ -26,23 +26,22 @@ sourceSets {
     
     test {
         java {
-            srcDirs = ['src/test/java']  // Adjust this if your test java files are in a different directory
+            srcDirs = ['src/test/java']  
         }
         resources {
-            srcDirs = ['src/test/resources']  // Adjust this if your test resources are in a different directory
+            srcDirs = ['src/test/resources']  
         }
     }
 }
 
 dependencies {
-    // Use JUnit Jupiter API for testing. The 'testImplementation' should be used for Jupiter API
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
-    // Use JUnit Jupiter Params for parameterized tests (if needed)
+
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.3'
-    // Use JUnit Jupiter Engine to run tests
+
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
 
-    // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
 
     //Apache POI dependency
@@ -64,17 +63,10 @@ tasks.withType(JavaCompile) {
 
 checkstyle {
     toolVersion = '9.0'
-    // Make sure to point to the actual Checkstyle config file, not just the directory
     config = resources.text.fromFile("${rootProject.projectDir}/app/config/checkstyle/checkstyle.xml")
   
     ignoreFailures = true
     showViolations = true
-    //configDir = file("${rootProject.projectDir}/app/config/checkstyle")
-    //configFile = file("${configDir}/checkstyle.xml")
-    //configProperties = [
-                //'configDir': configDir,
-                //'baseDir'  : rootDir,
-        //]
 }
 
 application {
@@ -82,11 +74,10 @@ application {
     mainClass = 'TextPrediction.App'
     //Define System.in as standard input
     run.standardInput = System.in
-    //rootProject.name = 'Markov name generator"
 }
 
 test {
-    // Use JUnit Platform for unit tests.
+
     useJUnitPlatform()
     maxHeapSize = '1G'
     testLogging {
