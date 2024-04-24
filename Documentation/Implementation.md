@@ -24,3 +24,6 @@ It seems that as of now, the order chosen by the user will affect the algorithm 
 I've used ChatGPT 4 for debugging my code and some ideas regarding the trie structure and pseudocode. However, most of the times I've tried to get some help from ChatGPT, it's ended into a worse situation than I had with my code earlier. One of the biggest reasons for struggling with the code has been that the logic of the end product's been lacking - and that hasn't had anything to do with the code itself.
 
 ### References
+
+https://en.wikipedia.org/wiki/Trie 
+https://algs4.cs.princeton.edu/lectures/keynote/52Tries.pdf 

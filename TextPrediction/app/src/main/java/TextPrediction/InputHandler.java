@@ -61,8 +61,9 @@ public class InputHandler {
             
         /**
    Method wordProcessor() picks words from a list processed by ExcelReader.
-   These words are split into nGrams according to user-given 'Markov order'. N-grams are then given to InsertTrie() method.
-   */
+   These words are split into nGrams according to user-given 'Markov order'. 
+   N-grams are then given to InsertTrie() method.
+   **/
     public void wordProcessor() throws InvalidFormatException, IOException {
         
         ArrayList<String> list = new ArrayList<String>();
@@ -71,7 +72,7 @@ public class InputHandler {
         for (String word : list) {
             for (int i = 0; i < word.length() - n; i++) {
                 String nGram = word.substring(i, i + n + 1);
-                nGram = nGram.toLowerCase().replaceAll("[^a-zäö-]", ""); //removes all letters that are not a-z, ä, ö or hyphens.
+                nGram = nGram.toLowerCase().replaceAll("[^a-zäö-]", ""); 
                 System.out.println("Inserting this nGram: " + nGram);
                 trie.insertTrie(nGram);
                 ngrams.add(nGram);

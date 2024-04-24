@@ -47,8 +47,10 @@ public class Trie {
    }
       /**
    The trieFind function returns a possible character to follow after a given sequence.
-   The function first checks the length of the string given. If the length = 0, a random letter under root node will be chosen.
-   If the length > 0, the singular characters forming the string will be traversed one by one until the last node is reached.
+   The function first checks the length of the string given. 
+   * If the length = 0, a random letter under root node will be chosen.
+   If the length > 0, the singular characters forming the 
+   * string will be traversed one by one until the last node is reached.
    effectiveN will always be <= string.length. 
    * @param sequence is the input sequence to base the next letter on.
    * @return the next character as String.
@@ -110,6 +112,7 @@ public class Trie {
         }
  
     }
+    
     
 
 }

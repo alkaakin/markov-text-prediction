@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,11 +23,16 @@ public class NameGenerator {
     private final int length;
     
     
-    public NameGenerator (int order, int volume, int length) throws IOException, InvalidFormatException, URISyntaxException {
+    public NameGenerator (int order, int volume, int length) throws IOException, InvalidFormatException {
         
         this.order = order;
         this.length = length;
-        File file = new File(App.class.getClassLoader().getResource("mod.xlsx").toURI());
+        File file = null;
+        try {
+            file = new File(App.class.getClassLoader().getResource("mod.xlsx").toURI());
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(NameGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         
         this.trie = new Trie(order);
@@ -36,9 +43,11 @@ public class NameGenerator {
   
         /**
     generateName() is the main functionality of the algorithm.
-    The method chooses a random character from the keyset and uses that as the first letter of the to-be generated name.
-    The method then gives information about the TrieNode under iteration, the chosen character, counter and the so far formed String to another method. 
-    */
+    The method chooses a random character from the keyset and 
+    uses that as the first letter of the to-be generated name.
+    The method then gives information about the TrieNode under 
+    iteration, the chosen character, counter and the so far formed String to another method. 
+    **/
     
     public String generateName() {
   

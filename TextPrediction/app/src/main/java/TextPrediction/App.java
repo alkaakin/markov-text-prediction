@@ -14,12 +14,15 @@ public class App {
     public static void main(String[] args) {
         try {
         Scanner inputTaker = new Scanner(System.in);
-        System.out.println("Welcome to the name generator. The name generator generates natural language mimicking names based on real names.");
-        System.out.println("For more authentic names, please use a higher order. Please note, however, that higher orders produce shorter names, and vice versa.");
+        System.out.println("Welcome to the name generator. "
+                + "The name generator generates natural language mimicking names based on real names.");
+        System.out.println("For more authentic names, please use a higher order. "
+                + "Please note, however, that higher orders produce shorter names, and vice versa.");
         System.out.println("Please give an order between 1-4. The higher the order, the better the results.");
         int order = promptNumber(inputTaker, "Enter your order (1-4):", 1, 4);
         
-        System.out.println("Please also indicate the level of complexity in terms of the size of dataset (between 1-10 000). The larger the dataset, the longer the names can be.");
+        System.out.println("Please indicate the level of complexity in terms of the size of dataset (between 1-10 000)."
+                + " The larger the dataset, the longer the names can be.");
         int volume = promptNumber(inputTaker, "Enter volume (1-10,000):", 1, 10000);
         
         System.out.println("Indicate the desired maximum length of the name (3-10 characters).");
@@ -36,7 +39,7 @@ public class App {
         }
     }
     
-    private static int promptNumber(Scanner scanner, String prompt, int min, int max) {
+    public static int promptNumber(Scanner scanner, String prompt, int min, int max) {
         int number;
         do {
             System.out.println(prompt);

@@ -70,7 +70,8 @@ public class TrieTest {
     String prediction = trie.trieFind("mi");
     assertNotNull(prediction, "Next letter should not be null");
     assertTrue(prediction.length() == 1, "Next letter should be a single character");
-    assertTrue(prediction.equals("k") || prediction.equals("l"), "Should give 'k' or 'l' as the next character after 'mi'");
+    assertTrue(prediction.equals("k") || prediction.equals("l"), "Should give 'k' or 'l' "
+            + "as the next character after 'mi'");
 }
     
     @Test
