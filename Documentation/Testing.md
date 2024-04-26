@@ -8,11 +8,7 @@ The trie tests test for inserting a certain nGram and whether the right letters 
 
 ### InputHandler
 
-Needs implementation.
-
-### NameGenerator
-
-Needs implementation.
+InputHandler test class implements a test for checking if the ArrayList is initialized correctly and names are added to it.
 
 ### Results of testing
 
