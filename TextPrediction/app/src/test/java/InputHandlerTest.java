@@ -4,51 +4,39 @@
  */
 package TextPrediction;
 
-import java.util.ArrayList;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import org.mockito.Mockito;
-import java.io.*;
-import java.util.Iterator;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- *
- * @author alkaakin
- */
-public class InputHandlerTest {
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+class InputHandlerTest {
     
-    public InputHandlerTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
+    private Trie trie;
+    private InputHandler handler;
+    private File testFile;
+
     @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
+    void setup() throws IOException, InvalidFormatException, URISyntaxException {
+    trie = new Trie(2);  // Setting up a trie with an order of 2
+    File file = new File(App.class.getClassLoader().getResource("mod.xlsx").toURI());
+    handler = new InputHandler(file, trie, 10);  // Assume we want to read up to 10 entries
     }
 
     @Test
-    void testWordProcessor() throws IOException, InvalidFormatException {
-
+    void testFileToList() throws IOException, InvalidFormatException {
+        ArrayList<String> words = handler.fileToList();
+        assertNotNull(words, "The word list should not be null.");
+        assertFalse(words.isEmpty(), "The word list should not be empty.");
+        assertTrue(words.contains("Juhani"), "The word list should contain specific expected words.");
     }
+
 }
